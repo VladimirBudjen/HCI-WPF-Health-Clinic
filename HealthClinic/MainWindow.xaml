@@ -1,0 +1,210 @@
+﻿<Window x:Class="HealthClinic.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HealthClinic"
+        xmlns:tableviewmodels="clr-namespace:HealthClinic.View.TableViewModels"
+        xmlns:tableviews="clr-namespace:HealthClinic.View.TableViews"
+        xmlns:cmd="clr-namespace:HealthClinic.View.Commands"
+        mc:Ignorable="d"
+        Title="Klinika Zdravo" Height="720" Width="1280">
+
+    <Window.Resources>
+        <DataTemplate x:Name="roomTemplate" DataType="{x:Type tableviewmodels:RoomsTableViewModel}">
+            <tableviews:RoomsTableView DataContext="{Binding}"/>
+        </DataTemplate>
+        <DataTemplate x:Name="physicianTemplate" DataType="{x:Type tableviewmodels:PhysicianTableViewModel}">
+            <tableviews:PhysiciansTableView DataContext="{Binding}"/>
+        </DataTemplate>
+        <DataTemplate x:Name="secretaryTemplate" DataType="{x:Type tableviewmodels:SecretaryTableViewModel}">
+            <tableviews:SecretaryTableView DataContext="{Binding}"/>
+        </DataTemplate>
+        <DataTemplate x:Name="waitingMedicineTemplate" DataType="{x:Type tableviewmodels:WaitingMedicineTableViewModel}">
+            <tableviews:WaitingMedicineTableView DataContext="{Binding}"/>
+        </DataTemplate>
+        <DataTemplate x:Name="renovationTemplate" DataType="{x:Type tableviewmodels:RenovationTableViewModel}">
+            <tableviews:RenovationTableView DataContext="{Binding}"/>
+        </DataTemplate>
+
+
+    </Window.Resources>
+    <Window.CommandBindings>
+        <CommandBinding Command="cmd:RoutedCommands.Rooms_Command" Executed="Rooms_Executed" CanExecute="Rooms_CanExecute"></CommandBinding>
+        <CommandBinding Command="cmd:RoutedCommands.Physicians_Command" Executed="Physicians_Executed" CanExecute="Physicians_CanExecute"></CommandBinding>
+        <CommandBinding Command="cmd:RoutedCommands.Secretaries_Command" Executed="Secretaries_Executed" CanExecute="Secretaries_CanExecute"></CommandBinding>
+        <CommandBinding Command="cmd:RoutedCommands.WaitingMedicine_Command" Executed="WaitingMedicine_Executed" CanExecute="WaitingMedicine_CanExecute"></CommandBinding>
+        <CommandBinding Command="cmd:RoutedCommands.Renovation_Command" Executed="Renovation_Executed" CanExecute="Renovation_CanExecute"></CommandBinding>
+        <CommandBinding Command="cmd:RoutedCommands.FocusTable_Command" Executed="FocusTable_Executed"></CommandBinding>
+        <CommandBinding Command="cmd:RoutedCommands.Search_Command" Executed="Search_Executed"></CommandBinding>
+        <CommandBinding Command="cmd:RoutedCommands.EditRow_Command" Executed="EditRow_Executed"></CommandBinding>
+        <CommandBinding Command="cmd:RoutedCommands.DeleteRow_Command"  Executed="DeletoRow_Executed"></CommandBinding>
+        <CommandBinding Command="cmd:RoutedCommands.AddRow_Command" Executed="EditRow_Executed"></CommandBinding>
+        <CommandBinding Command="cmd:RoutedCommands.RoomEquipmentDialog_Command" Executed="RoomEquipmentDialog_Executed" CanExecute="RoomsEquipmentDialog_CanExecute"></CommandBinding>
+        <CommandBinding Command="cmd:RoutedCommands.RoomRenovationDialog_Command" Executed="RoomRenovationDialog_Executed" CanExecute="RoomRenovationDialog_CanExecute"></CommandBinding>
+        <CommandBinding Command="cmd:RoutedCommands.PhysicianWorkingDialog_Command" Executed="PhysicianWorkingDialog_Executed" CanExecute="PhysicianWorkingDialog_CanExecute"></CommandBinding>
+        <CommandBinding Command="cmd:RoutedCommands.PhysicianVacationDialog_Command" Executed="PhysicianVacationDialog_Executed" CanExecute="PhysicianVacationDialog_CanExecute"></CommandBinding>
+
+
+
+
+    </Window.CommandBindings>
+
+    <DockPanel DockPanel.Dock="Top" VerticalAlignment="Stretch">
+        <Grid DockPanel.Dock="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Menu Grid.Column="0" x:Name="MyMeny">
+                <Menu.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <DockPanel HorizontalAlignment="Stretch"></DockPanel>
+                    </ItemsPanelTemplate>
+                </Menu.ItemsPanel>
+                <MenuItem Header="Edit" x:Name="EditHeader">
+                    <MenuItem Header="Menjaj red" Command="cmd:RoutedCommands.EditRow_Command" ></MenuItem>
+                    <MenuItem Header="Izbriši red" Command="cmd:RoutedCommands.DeleteRow_Command"></MenuItem>
+                    <MenuItem Header="Dodaj red" Command="cmd:RoutedCommands.AddRow_Command"></MenuItem>
+                    <Separator></Separator>
+                    <MenuItem Header="Pretraga" Command="cmd:RoutedCommands.Search_Command"></MenuItem>
+                    <Separator x:Name="EditSeparator"></Separator>
+                
+                </MenuItem>
+                <MenuItem Header="View">
+                    <MenuItem Header="Statistika za trenutnu tabelu"></MenuItem>
+                    <Separator></Separator>
+                    <MenuItem Header="Sobe" Command="cmd:RoutedCommands.Rooms_Command"></MenuItem>
+                    <MenuItem Header="Lekari" Command="cmd:RoutedCommands.Physicians_Command"></MenuItem>
+                    <MenuItem Header="Sekretari" Command="cmd:RoutedCommands.Secretaries_Command"></MenuItem>
+                    <MenuItem Header="Lekovi" Command="cmd:RoutedCommands.WaitingMedicine_Command"></MenuItem>
+                    <MenuItem Header="Renoviranja" Command="cmd:RoutedCommands.Renovation_Command"></MenuItem>
+                    <MenuItem Header="Statistika"></MenuItem>
+                    <Separator></Separator>
+                    <MenuItem Header="Fokusiraj na tabelu" Command="cmd:RoutedCommands.FocusTable_Command"></MenuItem>
+                </MenuItem>
+                <MenuItem Header="_Help"></MenuItem>
+            </Menu>
+            <Menu Grid.Column="5" HorizontalAlignment="Right">
+                <MenuItem Header="_Nalog: Vladimir Budjen" HorizontalAlignment="Right">
+                    <MenuItem Header="Odjavi se"></MenuItem>
+                </MenuItem>
+            </Menu>
+         
+            <TextBox x:Name="searchTextBox" Grid.Column="2" Grid.ColumnSpan="2">
+                <TextBox.Style>
+                    <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                        <Style.Resources>
+                            <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                <VisualBrush.Visual>
+                                    <Label Content="Search" Foreground="LightGray" />
+                                </VisualBrush.Visual>
+                            </VisualBrush>
+                        </Style.Resources>
+                        <Style.Triggers>
+                            <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                            </Trigger>
+                            <Trigger Property="Text" Value="{x:Null}">
+                                <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter Property="Background" Value="White" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>
+            </TextBox>
+        </Grid>
+        <StatusBar Height="20" DockPanel.Dock="Bottom"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="213*"/>
+                <ColumnDefinition Width="213*"/>
+                <ColumnDefinition Width="35*"/>
+                <ColumnDefinition Width="18*"/>
+                <ColumnDefinition Width="159*"/>
+                <ColumnDefinition Width="212*"/>
+                <ColumnDefinition Width="212*"/>
+                <ColumnDefinition Width="212*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid Height="50" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="8" Margin="0,7,-0.4,7.8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.Resources>
+                    <Style x:Name="tabStyle" TargetType="RadioButton" BasedOn="{StaticResource {x:Type ToggleButton}}">
+                        <Setter Property="FontSize" Value="18" />
+                        <Setter Property="GroupName" Value="Tabs"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsChecked" Value="true">
+                                <Setter Property="BorderBrush" Value="BlueViolet"/>
+                                <Setter Property="BorderThickness" Value="0,0,0,6"/>
+                            </Trigger>
+                            <EventTrigger RoutedEvent="RadioButton.Checked">
+                                <EventTrigger.Actions>
+
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0:0:0.100" Storyboard.TargetProperty="FontSize" To="22" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger.Actions>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="RadioButton.Unchecked">
+                                <EventTrigger.Actions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0:0:0.100" Storyboard.TargetProperty="FontSize" To="18" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger.Actions>
+                            </EventTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Resources>
+
+                <RadioButton Grid.Column="0" x:Name="roomsTab" Content="Sobe" Checked="Rooms_Executed"/>
+                <RadioButton Grid.Column="1" x:Name="physiciansTab" Content="Lekari" Checked="Physicians_Executed"></RadioButton>
+                <RadioButton Grid.Column="2" x:Name="secretariesTab" Content="Sekretari" Checked="Secretaries_Executed"></RadioButton>
+                <RadioButton Grid.Column="3" x:Name="medicineTab" Content="Lekovi" Checked="WaitingMedicine_Executed"></RadioButton>
+                <RadioButton Grid.Column="4" x:Name="renovationTab" Content="Renoviranja" Checked="Renovation_Executed"></RadioButton>
+                <RadioButton Grid.Column="5" x:Name="statisticsTab" Content="Statistika"></RadioButton>
+
+            </Grid>
+
+            <Grid Grid.Column="0"  Grid.Row="1" Grid.RowSpan="9" Grid.ColumnSpan="8" Margin="10,10.2,9.6,9.8">
+                <ContentControl Content="{Binding}" Name="Tables">
+
+                </ContentControl>
+            </Grid>
+
+
+
+
+
+        </Grid>
+
+    </DockPanel>
+</Window>

@@ -1,0 +1,59 @@
+﻿<Window x:Class="HealthClinic.View.Dialogs.PhysicianDialogs.NewPhysicianDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HealthClinic.View.Dialogs.PhysicianDialogs"
+        mc:Ignorable="d"
+        Title="Dodaj lekara" Height="370" Width="320"  WindowStyle="ToolWindow" ResizeMode="CanResizeWithGrip">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4" x:Name="nameLabel" Content="Ime" FontSize="16"/>
+        <TextBox Grid.Column="4" Grid.Row="0"  Grid.ColumnSpan="4" Margin="0,2,5,2" x:Name="ImeTextInput"/>
+        <Label Grid.Column="0" Grid.Row="1"  Grid.ColumnSpan="4" x:Name="surnameLabel" Content="Prezime:" FontSize="16"/>
+        <TextBox Grid.Column="4" Grid.Row="1" Grid.ColumnSpan="4"  Margin="0,2,5,2" x:Name="surnameTextInput"/>
+        <Label Grid.Column="0" Grid.Row="2"  Grid.ColumnSpan="4" x:Name="jmbgLabel" Content="Jmbg:" FontSize="16"/>
+        <TextBox Grid.Column="4" Grid.Row="2" Grid.ColumnSpan="4" Margin="0,2,5,2" x:Name="jmbgTextInput"/>
+        <Label Grid.Column="0" Grid.Row="3"  Grid.ColumnSpan="4" x:Name="dateLabel" Content="Datum rođenja:" FontSize="16"/>
+        <TextBox Grid.Column="4" Grid.Row="3" Grid.ColumnSpan="4" Margin="0,2,5,2" x:Name="dateTextInput" Text="yyyy/mm/dd" Foreground="Gray"/>
+        <Label Grid.Column="0" Grid.Row="4"  Grid.ColumnSpan="4" x:Name="coutryLabel" Content="Država:" FontSize="16"/>
+        <ComboBox Grid.Column="4" Grid.Row="4" Margin="0,2,5,2" Grid.ColumnSpan="4" x:Name="RoomCombo"/>
+        <Label Grid.Column="0" Grid.Row="5"  Grid.ColumnSpan="4" x:Name="cityLabel" Content="Grad:" FontSize="16"/>
+        <ComboBox Grid.Column="4" Grid.Row="5" Margin="0,2,5,2" Grid.ColumnSpan="4" x:Name="CityCombo"/>
+        <Label Grid.Column="0" Grid.Row="6"  Grid.ColumnSpan="4" x:Name="adressLabel" Content="Adresa:" FontSize="16"/>
+        <TextBox Grid.Column="4" Grid.Row="6" Grid.ColumnSpan="4" Margin="0,2,5,2" x:Name="adressInput"/>
+        <Label Grid.Column="0" Grid.Row="7"  Grid.ColumnSpan="4" x:Name="specialityLabel" Content="Specijalnost:" FontSize="16"/>
+        <ComboBox Grid.Column="4" Grid.Row="7" Margin="0,2,5,2" Grid.ColumnSpan="4" x:Name="specialityCombo"/>
+
+
+        <Button Grid.Column="0" Grid.Row="9" Margin="10,0,10,3" Grid.ColumnSpan="4"
+               x:Name="cancelButton" Content="Cancel" FontSize="16"/>
+        <Button Grid.Column="4" Grid.Row="9" Margin="10,0,10,3" Grid.ColumnSpan="4"
+             x:Name="okButton" Content="OK" FontSize="16"/>
+        <StatusBar Grid.Row="10" Grid.ColumnSpan="8" Margin="0,10,0,0"></StatusBar>
+    
+    </Grid>
+</Window>

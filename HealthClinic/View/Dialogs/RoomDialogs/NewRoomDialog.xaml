@@ -1,0 +1,39 @@
+﻿<Window x:Class="HealthClinic.View.Dialogs.RoomDialogs.NewRoomDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HealthClinic.View.Dialogs.RoomDialogs"
+        mc:Ignorable="d"
+        Title="Dodaj novu prostoriju" Height="260" Width="330"  WindowStyle="ToolWindow" ResizeMode="CanResizeWithGrip">
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Column="0" Grid.Row="1" Margin="10,0,0,0" Grid.ColumnSpan="4" x:Name="IDLabel" Content="ID prostorije:" FontSize="16"/>
+        <TextBox Grid.Column="4" Grid.Row="1" Margin="10,0,10,0" Grid.ColumnSpan="4" x:Name="IDTextInput"/>
+        <Label Grid.Column="0" Grid.Row="3" Margin="10,0,0,0" Grid.ColumnSpan="3" x:Name="roomTypeLabel" Content="Tip prostorije:" FontSize="16"/>
+        <ComboBox Grid.Column="4" Grid.Row="3" Margin="10,0,10,0" Grid.ColumnSpan="4" x:Name="typeCombo"/>
+        <Button Grid.Column="0" Grid.Row="5" Margin="10,0,10,0" Grid.ColumnSpan="4" x:Name="cancelButton" Content="Cancel" FontSize="16"/>
+        <Button Grid.Column="4" Grid.Row="5" Margin="10,0,10,0" Grid.ColumnSpan="4" x:Name="okButton" Content="OK" FontSize="16"/>
+        <StatusBar Grid.Row="7" Grid.ColumnSpan="8" Margin="0,10,0,0"></StatusBar>
+    </Grid>
+</Window>

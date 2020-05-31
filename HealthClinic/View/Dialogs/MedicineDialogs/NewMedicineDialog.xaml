@@ -1,0 +1,40 @@
+﻿<Window x:Class="HealthClinic.View.Dialogs.MedicineDialogs.NewMedicineDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HealthClinic.View.Dialogs.MedicineDialogs"
+        mc:Ignorable="d"
+        Title="Dodaj lek" Height="300" Width="300"  WindowStyle="ToolWindow" ResizeMode="CanResizeWithGrip">
+    <Grid>
+       
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+        <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" x:Name="copyrightNameLabel" Content="Zaštićeni naziv:"  FontSize="16"/>
+        <TextBox Grid.Column="3" Grid.Row="1"  Grid.ColumnSpan="3" Margin="5,2,5,2" x:Name="copyrightNameInput"/>
+        <Label Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3" x:Name="genericNameLabel" Content="Generički naziv:" FontSize="16"/>
+        <TextBox Grid.Column="3" Grid.Row="2"  Grid.ColumnSpan="3" Margin="5,2,5,2" x:Name="genericNameInput"/>
+        <Label Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="3" x:Name="manufacturerLabel" Content="Proizvođač:" FontSize="16"/>
+        <TextBox Grid.Column="3" Grid.Row="3"  Grid.ColumnSpan="3" Margin="5,2,5,2" x:Name="manufacturerInput"/>
+        <Label Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="3" x:Name="descriptionLabel" Content="Kratak opis:" FontSize="16"/>
+        <TextBox Grid.Column="3" Grid.Row="4"  Grid.ColumnSpan="3" Margin="5,2,5,2" x:Name="descriptionInput"/>
+        <Button Grid.Column="0" Grid.Row="5" Margin="10,5,10,5" Grid.ColumnSpan="3" x:Name="cancelButton" Content="Cancel" FontSize="16"/>
+        <Button Grid.Column="3" Grid.Row="5" Margin="10,5,10,5" Grid.ColumnSpan="3" x:Name="okButton" Content="OK" FontSize="16"/>
+        <StatusBar Grid.Row="7" Grid.ColumnSpan="6" Margin="0,15,0,0"></StatusBar>
+    </Grid>
+</Window>
