@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="HealthClinic.View.TableViews.MedicineTableView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:tableviewmodels="clr-namespace:HealthClinic.View.TableViewModels"
+             xmlns:tableviews="clr-namespace:HealthClinic.View.TableViews"
+             xmlns:local="clr-namespace:HealthClinic.View.TableViews"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <DataTemplate x:Name="waitingMedicineTemplate" DataType="{x:Type tableviewmodels:WaitingMedicineTableViewModel}">
+            <tableviews:MedicineTableView DataContext="{Binding}"/>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Label FontSize="25" Grid.Column="0" x:Name="medicineHeader">Lekovi na čekanju</Label>
+            <Grid Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <RadioButton Grid.Column="0" Content="Lekovi na čekanju" x:Name="waitingRadio" IsChecked="True" Checked="waiting_Chacked"></RadioButton>
+                <RadioButton Grid.Column="1" Content="Odbijeni lekovi" x:Name="rejectedRadio"  Checked="rejected_Chacked"></RadioButton>
+                <RadioButton Grid.Column="2" Content="Odobreni lekovi" x:Name="approvedRadio" Checked="approval_Chacked"></RadioButton>
+            </Grid>
+
+        </Grid>
+        <Frame x:Name="Tables" Grid.Column="1"  Grid.Row="1" Grid.RowSpan="9" Grid.ColumnSpan="8" NavigationUIVisibility="Hidden">
+           
+        </Frame>
+       
+    </Grid>
+</UserControl>

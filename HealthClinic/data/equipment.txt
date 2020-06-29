@@ -1,0 +1,3 @@
+{"Name":"Špric","Id":"0","SerialNumber":"3c1113e3-961d-4585-9f9f-08d2ed82bcd5"}
+{"Name":"Ladica","Id":"4","SerialNumber":"fa426106-2898-4ba5-baa5-a07d339d346a"}
+{"Name":"Krevet sa sisaljkom","Id":"3","SerialNumber":"a653956f-9d24-48fb-8785-0c362c83557f"}

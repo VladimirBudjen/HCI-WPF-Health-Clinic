@@ -27,14 +27,31 @@
             <Label FontSize="25" Grid.Column="0">Renoviranja</Label>
 
         </Grid>
-        <DataGrid Grid.Row="1" Grid.RowSpan="9" x:Name="dataGridRooms" ItemsSource="{Binding Renovations}" IsReadOnly="True"  SelectionMode="Single" 
-                  AutoGenerateColumns="False">
+        <DataGrid Grid.Row="1" Grid.RowSpan="8" x:Name="dataGridRenovations" ItemsSource="{Binding Renovations}" IsReadOnly="True"  SelectionMode="Single" 
+                  AutoGenerateColumns="False" KeyDown="shiftPressed" SelectionChanged="selectionChanged_Event">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Soba" Binding="{Binding Room}" Width="*"/>
                 <DataGridTextColumn Header="Početak renoviranja" Binding="{Binding StartMoment}" Width="*" />
                 <DataGridTextColumn Header="Kraj renoviranja" Binding="{Binding EndMoment}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
+        <Menu x:Name="menu" HorizontalAlignment="Right" Height="134" Margin="700,35,0,0" Grid.Row="3" Grid.RowSpan="4" VerticalAlignment="Top" Width="100" IsEnabled="False" Visibility="Collapsed">
+            <Menu.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel VerticalAlignment="Stretch"></StackPanel>
+                </ItemsPanelTemplate>
+            </Menu.ItemsPanel>
+            <MenuItem Header="Nazad" x:Name="backOption" Click="back" KeyDown="back" />
+            <MenuItem Header="Dodaj renoviranje" x:Name="addOption" Click="addRowOption" />
+            <MenuItem Header="Izmeni renoviranje" x:Name="editOption" Click="editRowOption"  />
+            <MenuItem Header="Izbriši renoviranje" x:Name="deleteOption" Click="deleteRowOtpion" />
+        </Menu>
+        <StackPanel Grid.Row="9" Margin="0,25,0,0">
+            <StatusBarItem>
+                <TextBlock Name="statusBar">
 
+                </TextBlock>
+            </StatusBarItem>
+        </StackPanel>
     </Grid>
 </UserControl>

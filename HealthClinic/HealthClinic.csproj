@@ -35,8 +35,26 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Compression.Base, Version=18.1460.0.56, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Compression.Base.18.1.0.56\lib\net46\Syncfusion.Compression.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Licensing, Version=18.1460.0.56, Culture=neutral, PublicKeyToken=632609b4d040f6b4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Licensing.18.1.0.56\lib\net46\Syncfusion.Licensing.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Pdf.Base, Version=18.1460.0.56, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Pdf.Wpf.18.1.0.56\lib\net46\Syncfusion.Pdf.Base.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Collections.NonGeneric, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Collections.NonGeneric.4.3.0\lib\net46\System.Collections.NonGeneric.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -56,14 +74,165 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Model\MedicineModel.cs" />
-    <Compile Include="Model\PhysicianModel.cs" />
-    <Compile Include="Model\RenovationModel.cs" />
-    <Compile Include="Model\RoomModel.cs" />
-    <Compile Include="Model\SecretaryModel.cs" />
+    <Compile Include="Backend\Controller\PatientControllers\PatientScheduleController.cs" />
+    <Compile Include="Backend\Controller\PatientRegistrationController.cs" />
+    <Compile Include="Backend\Controller\PhysitianControllers\ExamController.cs" />
+    <Compile Include="Backend\Controller\PhysitianControllers\FollowUpAppointmentSchedulingController.cs" />
+    <Compile Include="Backend\Controller\PhysitianControllers\InpatientCareController.cs" />
+    <Compile Include="Backend\Controller\PhysitianControllers\PhysitianHospitalAccountsController.cs" />
+    <Compile Include="Backend\Controller\PhysitianControllers\PhysitianHospitalController.cs" />
+    <Compile Include="Backend\Controller\PhysitianControllers\PhysitianMedicineController.cs" />
+    <Compile Include="Backend\Controller\PhysitianControllers\PhysitianScheduleController.cs" />
+    <Compile Include="Backend\Controller\PhysitianControllers\SpecialistAppointmentSchedulingController.cs" />
+    <Compile Include="Backend\Controller\SecretaryControllers\SecretaryHospitalController.cs" />
+    <Compile Include="Backend\Controller\SecretaryControllers\SecretaryScheduleController.cs" />
+    <Compile Include="Backend\Controller\SuperintendentControllers\EquipmentController.cs" />
+    <Compile Include="Backend\Controller\SuperintendentControllers\MedicineAddingController.cs" />
+    <Compile Include="Backend\Controller\SuperintendentControllers\RenovationController.cs" />
+    <Compile Include="Backend\Controller\SuperintendentControllers\RoomController.cs" />
+    <Compile Include="Backend\Controller\SuperintendentControllers\SuperiIntendentPhysiciansController.cs" />
+    <Compile Include="Backend\Controller\SuperintendentControllers\SuperIntendentHospitalController.cs" />
+    <Compile Include="Backend\Controller\SuperintendentControllers\SuperintendentMedicineController.cs" />
+    <Compile Include="Backend\Controller\SuperintendentControllers\SuperIntendentSecretariesController.cs" />
+    <Compile Include="Backend\Dto\AppointmentDTO.cs" />
+    <Compile Include="Backend\Dto\AppointmentGeneralitiesDTO.cs" />
+    <Compile Include="Backend\Dto\BedReservationDTO.cs" />
+    <Compile Include="Backend\Dto\PatientDTO.cs" />
+    <Compile Include="Backend\Dto\RejectedMedicineDTO.cs" />
+    <Compile Include="Backend\Dto\RenovationDTO.cs" />
+    <Compile Include="Backend\Dto\SuggestedAppointmentDTO.cs" />
+    <Compile Include="Backend\Model\Accounts\Account.cs" />
+    <Compile Include="Backend\Model\Accounts\Patient.cs" />
+    <Compile Include="Backend\Model\Accounts\Physitian.cs" />
+    <Compile Include="Backend\Model\Accounts\Secretary.cs" />
+    <Compile Include="Backend\Model\Accounts\Specialization.cs" />
+    <Compile Include="Backend\Model\Accounts\Superintendent.cs" />
+    <Compile Include="Backend\Model\Blog\BlogPost.cs" />
+    <Compile Include="Backend\Model\Blog\Comment.cs" />
+    <Compile Include="Backend\Model\Hospital\Bed.cs" />
+    <Compile Include="Backend\Model\Hospital\BedReservation.cs" />
+    <Compile Include="Backend\Model\Hospital\Equipment.cs" />
+    <Compile Include="Backend\Model\Hospital\Hospital.cs" />
+    <Compile Include="Backend\Model\Hospital\Medicine.cs" />
+    <Compile Include="Backend\Model\Hospital\MedicineManufacturer.cs" />
+    <Compile Include="Backend\Model\Hospital\MedicineType.cs" />
+    <Compile Include="Backend\Model\Hospital\Rejection.cs" />
+    <Compile Include="Backend\Model\Hospital\Renovation.cs" />
+    <Compile Include="Backend\Model\Hospital\Room.cs" />
+    <Compile Include="Backend\Model\Hospital\RoomBedType.cs" />
+    <Compile Include="Backend\Model\Hospital\RoomType.cs" />
+    <Compile Include="Backend\Model\MedicalExam\AdditionalDocument.cs" />
+    <Compile Include="Backend\Model\MedicalExam\DiagnosticReferral.cs" />
+    <Compile Include="Backend\Model\MedicalExam\DiagnosticType.cs" />
+    <Compile Include="Backend\Model\MedicalExam\FollowUp.cs" />
+    <Compile Include="Backend\Model\MedicalExam\InpatientCare.cs" />
+    <Compile Include="Backend\Model\MedicalExam\MedicineDosage.cs" />
+    <Compile Include="Backend\Model\MedicalExam\Prescription.cs" />
+    <Compile Include="Backend\Model\MedicalExam\Report.cs" />
+    <Compile Include="Backend\Model\MedicalExam\SpecialistReferral.cs" />
+    <Compile Include="Backend\Model\Schedule\Appointment.cs" />
+    <Compile Include="Backend\Model\Schedule\ProcedureType.cs" />
+    <Compile Include="Backend\Model\Schedule\Schedule.cs" />
+    <Compile Include="Backend\Model\Util\Address.cs" />
+    <Compile Include="Backend\Model\Util\City.cs" />
+    <Compile Include="Backend\Model\Util\Country.cs" />
+    <Compile Include="Backend\Model\Util\Entity.cs" />
+    <Compile Include="Backend\Model\Util\TimeInterval.cs" />
+    <Compile Include="Backend\Repository\AddressFileSystem.cs" />
+    <Compile Include="Backend\Repository\AddressRepository.cs" />
+    <Compile Include="Backend\Repository\AppointmentFileSystem.cs" />
+    <Compile Include="Backend\Repository\AppointmentRepository.cs" />
+    <Compile Include="Backend\Repository\ApprovedMedicineFileSystem.cs" />
+    <Compile Include="Backend\Repository\ApprovedMedicineRepository.cs" />
+    <Compile Include="Backend\Repository\BedReservationFileSystem.cs" />
+    <Compile Include="Backend\Repository\BedReservationRepository.cs" />
+    <Compile Include="Backend\Repository\CityFileSystem.cs" />
+    <Compile Include="Backend\Repository\CityRepository.cs" />
+    <Compile Include="Backend\Repository\CountryFileSystem.cs" />
+    <Compile Include="Backend\Repository\CountryRepository.cs" />
+    <Compile Include="Backend\Repository\DiagnosticTypeFileSystem.cs" />
+    <Compile Include="Backend\Repository\DiagnosticTypeRepository.cs" />
+    <Compile Include="Backend\Repository\EquipmentFileSystem.cs" />
+    <Compile Include="Backend\Repository\EquipmentRepository.cs" />
+    <Compile Include="Backend\Repository\GenericFileSystem.cs" />
+    <Compile Include="Backend\Repository\GenericRepository.cs" />
+    <Compile Include="Backend\Repository\InpatientCareFileSystem.cs" />
+    <Compile Include="Backend\Repository\InpatientCareRepository.cs" />
+    <Compile Include="Backend\Repository\PatientFileSystem.cs" />
+    <Compile Include="Backend\Repository\PatientRepository.cs" />
+    <Compile Include="Backend\Repository\PhysitianFileSystem.cs" />
+    <Compile Include="Backend\Repository\PhysitianRepository.cs" />
+    <Compile Include="Backend\Repository\ProcedureTypeFileSystem.cs" />
+    <Compile Include="Backend\Repository\ProcedureTypeRepository.cs" />
+    <Compile Include="Backend\Repository\RejectionFileSystem.cs" />
+    <Compile Include="Backend\Repository\RejectionRepository.cs" />
+    <Compile Include="Backend\Repository\RenovationFileSystem.cs" />
+    <Compile Include="Backend\Repository\RenovationRepository.cs" />
+    <Compile Include="Backend\Repository\ReportFileSystem.cs" />
+    <Compile Include="Backend\Repository\ReportRepository.cs" />
+    <Compile Include="Backend\Repository\RoomBedTypeFileSystem.cs" />
+    <Compile Include="Backend\Repository\RoomBedTypeRepository.cs" />
+    <Compile Include="Backend\Repository\RoomFileSystem.cs" />
+    <Compile Include="Backend\Repository\RoomRepository.cs" />
+    <Compile Include="Backend\Repository\RoomTypeFileSystem.cs" />
+    <Compile Include="Backend\Repository\RoomTypeRepository.cs" />
+    <Compile Include="Backend\Repository\SecretaryFileSystem.cs" />
+    <Compile Include="Backend\Repository\SecretaryRepository.cs" />
+    <Compile Include="Backend\Repository\SpecializationFileSystem.cs" />
+    <Compile Include="Backend\Repository\SpecializationRepository.cs" />
+    <Compile Include="Backend\Repository\WaitingMedicineFileSystem.cs" />
+    <Compile Include="Backend\Repository\WaitingMedicineRepository.cs" />
+    <Compile Include="Backend\Service\HospitalAccountsService\HospitalService.cs" />
+    <Compile Include="Backend\Service\HospitalAccountsService\PatientAccountsService.cs" />
+    <Compile Include="Backend\Service\HospitalAccountsService\PatientRegistrationService.cs" />
+    <Compile Include="Backend\Service\HospitalAccountsService\PhysicianAccountService.cs" />
+    <Compile Include="Backend\Service\HospitalAccountsService\SecretaryAccountService.cs" />
+    <Compile Include="Backend\Service\HospitalResourcesService\EquipmentService.cs" />
+    <Compile Include="Backend\Service\HospitalResourcesService\RenovationService.cs" />
+    <Compile Include="Backend\Service\HospitalResourcesService\RoomService.cs" />
+    <Compile Include="Backend\Service\MedicineService\MedicineAddingService.cs" />
+    <Compile Include="Backend\Service\MedicineService\MedicineApprovalService.cs" />
+    <Compile Include="Backend\Service\MedicineService\PhysitianMedicineService.cs" />
+    <Compile Include="Backend\Service\MedicineService\SuperintendentMedicineService.cs" />
+    <Compile Include="Backend\Service\PatientCareService\InpatientCareService.cs" />
+    <Compile Include="Backend\Service\PatientCareService\ReportService.cs" />
+    <Compile Include="Backend\Service\SchedulingService\AppointmentGeneralitiesOptions\AppointmentGeneralitiesManager.cs" />
+    <Compile Include="Backend\Service\SchedulingService\AppointmentGeneralitiesOptions\PatientAvailabilityService.cs" />
+    <Compile Include="Backend\Service\SchedulingService\AppointmentGeneralitiesOptions\PhysitianAvailabilityService.cs" />
+    <Compile Include="Backend\Service\SchedulingService\AppointmentGeneralitiesOptions\RoomAvailabilityService.cs" />
+    <Compile Include="Backend\Service\SchedulingService\AppointmentGeneralitiesOptions\TimeIntervalFilter.cs" />
+    <Compile Include="Backend\Service\SchedulingService\AppointmentGeneralitiesOptions\TimeIntervalGenerator.cs" />
+    <Compile Include="Backend\Service\SchedulingService\AppointmentSchedulingService.cs" />
+    <Compile Include="Backend\Service\SchedulingService\AppointmentService.cs" />
+    <Compile Include="Backend\Service\SchedulingService\PatientScheduleService.cs" />
+    <Compile Include="Backend\Service\SchedulingService\PhysitianScheduleService.cs" />
+    <Compile Include="Backend\Service\SchedulingService\PriorityStrategies\DatePriorityStrategy.cs" />
+    <Compile Include="Backend\Service\SchedulingService\PriorityStrategies\PhysitianPriorityStrategy.cs" />
+    <Compile Include="Backend\Service\SchedulingService\PriorityStrategies\PriorityStrategy.cs" />
+    <Compile Include="Backend\Service\SchedulingService\SchedulingStrategies\PatientSchedulingStrategy.cs" />
+    <Compile Include="Backend\Service\SchedulingService\SchedulingStrategies\PhysitianFollowUpSchedulingStrategy.cs" />
+    <Compile Include="Backend\Service\SchedulingService\SchedulingStrategies\PhysitianSpecialistSchedulingStrategy.cs" />
+    <Compile Include="Backend\Service\SchedulingService\SchedulingStrategies\SchedulingStrategy.cs" />
+    <Compile Include="Backend\Service\SchedulingService\SchedulingStrategies\SecretarySchedulingStrategy.cs" />
+    <Compile Include="Backend\Service\SchedulingService\SchedulingStrategies\SuggestedAppointmentSchedulingStrategy.cs" />
+    <Compile Include="ViewModels\EquipmentViewModel.cs" />
+    <Compile Include="ViewModels\MedicineViewModel.cs" />
+    <Compile Include="ViewModels\PhysicianViewModel.cs" />
+    <Compile Include="ViewModels\RejectionViewModel.cs" />
+    <Compile Include="ViewModels\RenovationViewModel.cs" />
+    <Compile Include="ViewModels\RoomViewModel.cs" />
+    <Compile Include="ViewModels\SecretaryViewModel.cs" />
+    <Compile Include="ViewModels\VacationViewModel.cs" />
     <Compile Include="View\Commands\RoutedCommands.cs" />
+    <Compile Include="View\Converters\ComboToButtonConverter.cs" />
+    <Compile Include="View\Dialogs\MedicineDialogs\EditMedicineDialog.xaml.cs">
+      <DependentUpon>EditMedicineDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Dialogs\MedicineDialogs\NewMedicineDialog.xaml.cs">
       <DependentUpon>NewMedicineDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Dialogs\PhysicianDialogs\EditPhysicianDialog.xaml.cs">
+      <DependentUpon>EditPhysicianDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Dialogs\PhysicianDialogs\NewPhysicianDialog.xaml.cs">
       <DependentUpon>NewPhysicianDialog.xaml</DependentUpon>
@@ -75,8 +244,15 @@
     <Compile Include="View\Dialogs\PhysicianDialogs\WorkingDialog.xaml.cs">
       <DependentUpon>WorkingDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Dialogs\RenovationDialogs\EditRenovationDialog.xaml.cs">
+      <DependentUpon>EditRenovationDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Dialogs\RenovationDialogs\NewRenovationDialog.xaml.cs">
       <DependentUpon>NewRenovationDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Dialogs\RoomDialogs\EditRoomDialog.xaml.cs">
+      <DependentUpon>EditRoomDialog.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="View\Dialogs\RoomDialogs\NewRoomDialog.xaml.cs">
       <DependentUpon>NewRoomDialog.xaml</DependentUpon>
@@ -87,16 +263,29 @@
     <Compile Include="View\Dialogs\RoomDialogs\RoomRenovationDialog.xaml.cs">
       <DependentUpon>RoomRenovationDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Dialogs\SecretaryDialogs\EditSecretaryDialog.xaml.cs">
+      <DependentUpon>EditSecretaryDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Dialogs\SecretaryDialogs\NewSecretaryDialog.xaml.cs">
       <DependentUpon>NewSecretaryDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ErrorCheck\Checker.cs" />
     <Compile Include="View\TableViewModels\PhysicianTableViewModel.cs" />
     <Compile Include="View\TableViewModels\RenovationTableViewModel.cs" />
     <Compile Include="View\TableViewModels\RoomsTableViewModel.cs" />
     <Compile Include="View\TableViewModels\SecretaryTableViewModel.cs" />
     <Compile Include="View\TableViewModels\WaitingMedicineTableViewModel.cs" />
+    <Compile Include="View\TableViews\ApprovedMedicineTablePage.xaml.cs">
+      <DependentUpon>ApprovedMedicineTablePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TableViews\MedicineTableView.xaml.cs">
+      <DependentUpon>MedicineTableView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\TableViews\PhysiciansTableView.xaml.cs">
       <DependentUpon>PhysiciansTableView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TableViews\RejectedMedicineTablePage.xaml.cs">
+      <DependentUpon>RejectedMedicineTablePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\TableViews\RenovationTableView.xaml.cs">
       <DependentUpon>RenovationTableView.xaml</DependentUpon>
@@ -107,8 +296,8 @@
     <Compile Include="View\TableViews\SecretaryTableView.xaml.cs">
       <DependentUpon>SecretaryTableView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\TableViews\WaitingMedicineTableView.xaml.cs">
-      <DependentUpon>WaitingMedicineTableView.xaml</DependentUpon>
+    <Compile Include="View\TableViews\WaitingMedicinePage.xaml.cs">
+      <DependentUpon>WaitingMedicinePage.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -126,7 +315,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Dialogs\MedicineDialogs\EditMedicineDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Dialogs\MedicineDialogs\NewMedicineDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Dialogs\PhysicianDialogs\EditPhysicianDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -142,7 +339,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Dialogs\RenovationDialogs\EditRenovationDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Dialogs\RenovationDialogs\NewRenovationDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Dialogs\RoomDialogs\EditRoomDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -158,11 +363,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Dialogs\SecretaryDialogs\EditSecretaryDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Dialogs\SecretaryDialogs\NewSecretaryDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\TableViews\ApprovedMedicineTablePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TableViews\MedicineTableView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\TableViews\PhysiciansTableView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TableViews\RejectedMedicineTablePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -178,7 +399,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\TableViews\WaitingMedicineTableView.xaml">
+    <Page Include="View\TableViews\WaitingMedicinePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -201,6 +422,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

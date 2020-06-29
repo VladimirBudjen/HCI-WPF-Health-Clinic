@@ -4,8 +4,21 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HealthClinic.View.Dialogs.RoomDialogs"
+        xmlns:converters="clr-namespace:HealthClinic.View.Converters"
         mc:Ignorable="d"
         Title="Dodaj novu prostoriju" Height="260" Width="330"  WindowStyle="ToolWindow" ResizeMode="CanResizeWithGrip">
+    <Window.Resources>
+        <Style x:Key="MyButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="IsEnabled" Value="True"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=SelectedItem, ElementName=typeCombo}" Value="{x:Null}">
+                    <Setter Property="UIElement.IsEnabled" Value="False"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <converters:ComboToButtonConverter x:Key="ComboToButtonConverter"></converters:ComboToButtonConverter>
+    </Window.Resources>
     <Grid>
 
         <Grid.ColumnDefinitions>
@@ -29,11 +42,11 @@
         </Grid.RowDefinitions>
 
         <Label Grid.Column="0" Grid.Row="1" Margin="10,0,0,0" Grid.ColumnSpan="4" x:Name="IDLabel" Content="ID prostorije:" FontSize="16"/>
-        <TextBox Grid.Column="4" Grid.Row="1" Margin="10,0,10,0" Grid.ColumnSpan="4" x:Name="IDTextInput"/>
+        <TextBox Grid.Column="4" Grid.Row="1" Margin="10,0,10,0" Grid.ColumnSpan="4" x:Name="ID" FontSize="16"/>
         <Label Grid.Column="0" Grid.Row="3" Margin="10,0,0,0" Grid.ColumnSpan="3" x:Name="roomTypeLabel" Content="Tip prostorije:" FontSize="16"/>
-        <ComboBox Grid.Column="4" Grid.Row="3" Margin="10,0,10,0" Grid.ColumnSpan="4" x:Name="typeCombo"/>
-        <Button Grid.Column="0" Grid.Row="5" Margin="10,0,10,0" Grid.ColumnSpan="4" x:Name="cancelButton" Content="Cancel" FontSize="16"/>
-        <Button Grid.Column="4" Grid.Row="5" Margin="10,0,10,0" Grid.ColumnSpan="4" x:Name="okButton" Content="OK" FontSize="16"/>
+        <ComboBox Grid.Column="4" Grid.Row="3" Margin="10,0,10,0" Grid.ColumnSpan="4" x:Name="typeCombo" ItemsSource="{Binding Path=Types}"/>
+        <Button Grid.Column="0" Grid.Row="5" Margin="10,0,10,0" Grid.ColumnSpan="4" x:Name="cancelButton" Content="Cancel" FontSize="16" Click="CanceButton_Click"/>
+        <Button Grid.Column="4" Grid.Row="5" Margin="10,0,10,0" Grid.ColumnSpan="4" x:Name="okButton" Content="OK" FontSize="16" Click="OkButton_Click" IsEnabled="{Binding SelectedItem, ElementName=typeCombo, Converter={StaticResource ComboToButtonConverter}}"/>
         <StatusBar Grid.Row="7" Grid.ColumnSpan="8" Margin="0,10,0,0"></StatusBar>
     </Grid>
 </Window>

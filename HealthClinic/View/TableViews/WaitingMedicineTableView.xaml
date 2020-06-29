@@ -17,34 +17,35 @@
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-        </Grid.RowDefinitions>
-        <Grid Grid.Column="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <Label FontSize="25" Grid.Column="0">Lekovi na čekanju</Label>
-            <Grid Grid.Column="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <RadioButton Grid.Column="0" x:Name="waitingRadioButton" Content="Lekovi na čekanju" Focusable="{Binding RadioButtonFocus}"/>
-                <RadioButton Grid.Column="1" x:Name="physiciansTab" Content="Odobreni lekovi"></RadioButton>
-                <RadioButton Grid.Column="2" x:Name="secretariesTab" Content="Odbijeni lekovi"></RadioButton>
-            </Grid>
 
-        </Grid>
-        <DataGrid Grid.Row="1" Grid.RowSpan="9" x:Name="dataGridWaitingMedicine" ItemsSource="{Binding WaitingMedicine}" IsReadOnly="True"  SelectionMode="Single" 
-                  AutoGenerateColumns="False" Focusable="True">
+        </Grid.RowDefinitions>
+        
+        <DataGrid Grid.Row="0" Grid.RowSpan="8" x:Name="dataGridWaitingMedicine" ItemsSource="{Binding WaitingMedicine}" IsReadOnly="True"  SelectionMode="Single" 
+                  AutoGenerateColumns="False" Focusable="True" KeyUp="shiftPressed" SelectionChanged="selectionChanged_Event">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Zaštićeno ime" Binding="{Binding CopyrightName}" Width="*"/>
                 <DataGridTextColumn Header="Generičko ime" Binding="{Binding GenericName}" Width="*" />
                 <DataGridTextColumn Header="Proizvođač" Binding="{Binding Manufacturer}" Width="*"/>
-                <DataGridTextColumn Header="Kratak opis" Binding="{Binding Description}" Width="*"/>
+                <DataGridTextColumn Header="Kratak opis" Binding="{Binding Type}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
+        <Menu x:Name="menu" HorizontalAlignment="Right" Height="134" Margin="700,35,0,0" Grid.Row="3" Grid.RowSpan="4" VerticalAlignment="Top" Width="100" IsEnabled="False" Visibility="Collapsed">
+            <Menu.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel VerticalAlignment="Stretch"></StackPanel>
+                </ItemsPanelTemplate>
+            </Menu.ItemsPanel>
+            <MenuItem Header="Nazad" x:Name="backOption" Click="back" />
+            <MenuItem Header="Dodaj lek" x:Name="addOption" Click="addRowOption" />
+            <MenuItem Header="Izmeni lek" x:Name="editOption" Click="editRowOption" />
+            <MenuItem Header="Izbriši lek" x:Name="deleteOption" Click="deleteRowOtpion" />
+        </Menu>
+        <StackPanel Grid.Row="9" Margin="0,25,0,0">
+            <StatusBarItem>
+                <TextBlock Name="statusBar">
+
+                </TextBlock>
+            </StatusBarItem>
+        </StackPanel>
     </Grid>
 </UserControl>

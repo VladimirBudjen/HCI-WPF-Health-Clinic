@@ -1,0 +1,1 @@
+{"CopyrightName":"Gega","GenericName":"Papa","MedicineManufacturer":{"Name":"Sok","SerialNumber":"1fc63cda-ebf3-45e1-a6a0-391730fdbd2d"},"MedicineType":{"Type":"Lala","SerialNumber":"a30b858b-03ad-4b95-8c75-cdad747c3f4f"},"SerialNumber":"9191a2e9-e821-4f2e-b07b-89550c8c6767"}

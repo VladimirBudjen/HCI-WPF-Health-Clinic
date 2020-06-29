@@ -1,0 +1,2 @@
+{"Name":"Ostava","SerialNumber":"711f1f4b-1fbb-45b2-ba6d-a1acfbd3e5fb"}
+{"Name":"Operaciona sala","SerialNumber":"403e70c5-e170-49b1-bb22-caefc2b782b8"}

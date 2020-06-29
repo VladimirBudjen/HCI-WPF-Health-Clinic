@@ -29,11 +29,57 @@
         </Grid.RowDefinitions>
 
         <Label Grid.Column="0" Grid.Row="1" Margin="10,0,0,0" Grid.ColumnSpan="4" x:Name="startLabel" Content="Početak radnog vremena:" FontSize="16"/>
-        <TextBox Grid.Column="4" Grid.Row="1" Margin="10,0,10,0" Grid.ColumnSpan="4" x:Name="startTextInput" Text="hh:mm" Foreground="Gray"/>
+        <TextBox Grid.Column="4" Grid.Row="1" Margin="10,0,10,0" Grid.ColumnSpan="4" x:Name="startTextInput" TextChanged="TextInput_TextChanged">
+            <TextBox.Style>
+                <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                    <Style.Resources>
+                        <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                            <VisualBrush.Visual>
+                                <Label Content="HH:mm" Foreground="LightGray" />
+                            </VisualBrush.Visual>
+                        </VisualBrush>
+                    </Style.Resources>
+                    <Style.Triggers>
+                        <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                            <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                        </Trigger>
+                        <Trigger Property="Text" Value="{x:Null}">
+                            <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter Property="Background" Value="White" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
         <Label Grid.Column="0" Grid.Row="3" Margin="10,0,0,0" Grid.ColumnSpan="4" x:Name="endLabel" Content="Kraj radnog vremena:" FontSize="16"/>
-        <TextBox Grid.Column="4" Grid.Row="3" Margin="10,0,10,0" Grid.ColumnSpan="4" x:Name="endTextInput" Text="hh:mcažsm" Foreground="Gray"/>
-        <Button Grid.Column="0" Grid.Row="5" Margin="10,0,10,0" Grid.ColumnSpan="4" x:Name="cancelButton" Content="Cancel" FontSize="16"/>
-        <Button Grid.Column="4" Grid.Row="5" Margin="10,0,10,0" Grid.ColumnSpan="4" x:Name="okButton" Content="OK" FontSize="16"/>
+        <TextBox Grid.Column="4" Grid.Row="3" Margin="10,0,10,0" Grid.ColumnSpan="4" x:Name="endTextInput" TextChanged="TextInput_TextChanged">
+            <TextBox.Style>
+                <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                    <Style.Resources>
+                        <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                            <VisualBrush.Visual>
+                                <Label Content="HH:mm" Foreground="LightGray" />
+                            </VisualBrush.Visual>
+                        </VisualBrush>
+                    </Style.Resources>
+                    <Style.Triggers>
+                        <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                            <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                        </Trigger>
+                        <Trigger Property="Text" Value="{x:Null}">
+                            <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter Property="Background" Value="White" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
+        <Button Grid.Column="0" Grid.Row="5" Margin="10,0,10,0" Grid.ColumnSpan="4" x:Name="cancelButton" Content="Cancel" FontSize="16" Click="CancelButton_Click"/>
+        <Button Grid.Column="4" Grid.Row="5" Margin="10,0,10,0" Grid.ColumnSpan="4" x:Name="okButton" Content="OK" FontSize="16" Click="OkButton_Click" IsEnabled="False"/>
         <StatusBar Grid.Row="7" Grid.ColumnSpan="8" Margin="0,10,0,0"></StatusBar>
     </Grid>
 </Window>

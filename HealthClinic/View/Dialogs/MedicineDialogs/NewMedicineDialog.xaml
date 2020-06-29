@@ -33,8 +33,8 @@
         <TextBox Grid.Column="3" Grid.Row="3"  Grid.ColumnSpan="3" Margin="5,2,5,2" x:Name="manufacturerInput"/>
         <Label Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="3" x:Name="descriptionLabel" Content="Kratak opis:" FontSize="16"/>
         <TextBox Grid.Column="3" Grid.Row="4"  Grid.ColumnSpan="3" Margin="5,2,5,2" x:Name="descriptionInput"/>
-        <Button Grid.Column="0" Grid.Row="5" Margin="10,5,10,5" Grid.ColumnSpan="3" x:Name="cancelButton" Content="Cancel" FontSize="16"/>
-        <Button Grid.Column="3" Grid.Row="5" Margin="10,5,10,5" Grid.ColumnSpan="3" x:Name="okButton" Content="OK" FontSize="16"/>
+        <Button Grid.Column="0" Grid.Row="5" Margin="10,5,10,5" Grid.ColumnSpan="3" x:Name="cancelButton" Content="Cancel" FontSize="16" Click="CancelButton_Click"/>
+        <Button Grid.Column="3" Grid.Row="5" Margin="10,5,10,5" Grid.ColumnSpan="3" x:Name="okButton" Content="OK" FontSize="16" Click="OkButton_Click"/>
         <StatusBar Grid.Row="7" Grid.ColumnSpan="6" Margin="0,15,0,0"></StatusBar>
     </Grid>
 </Window>

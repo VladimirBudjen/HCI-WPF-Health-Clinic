@@ -1,28 +1,10 @@
 ﻿using HealthClinic.View.Commands;
-using HealthClinic.View.Dialogs.MedicineDialogs;
-using HealthClinic.View.Dialogs.PhysicianDialogs;
-using HealthClinic.View.Dialogs.RenovationDialogs;
-using HealthClinic.View.Dialogs.RoomDialogs;
-using HealthClinic.View.Dialogs.SecretaryDialogs;
 using HealthClinic.View.TableViewModels;
-using HealthClinic.View.TableViews;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Forms;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using MenuItem = System.Windows.Controls.MenuItem;
-using MessageBox = System.Windows.Forms.MessageBox;
+using System.Threading;
+using HealthClinic.View.TableViews;
 
 namespace HealthClinic
 {
@@ -49,8 +31,15 @@ namespace HealthClinic
         private MenuItem _roomEquipmentItem;
         private MenuItem _physicianVacationItem;
         private MenuItem _physicianWorkingItem;
+        public delegate void mainVoidDelegate();
+        public delegate int mainIntDelegate();
+
+
+
         private int _selectedTabIndex;
+        private int _selectedTableRowIndex;
         public int SelectedTabIndex { get => _selectedTabIndex; set => _selectedTabIndex = value; }
+        public int SelectedTableRowIndex { get => _selectedTableRowIndex; set => _selectedTableRowIndex = value; }
 
         public MainWindow()
         {
@@ -58,12 +47,14 @@ namespace HealthClinic
             CreateAllMenuItems();
             CreateAllViewModels();
             CreateRoomDataContext();
+
         }
 
         private void CreateRoomDataContext()
         {
             DataContext = _roomsTableViewModel;
             SelectedTabIndex = (int)currentTabIndex.roomsTabIndex;
+            SelectedTableRowIndex = -1;
             roomsTab.IsChecked = true;
             Tables.Focus();
             removeAllMenuItems();
@@ -97,13 +88,49 @@ namespace HealthClinic
 
         }
 
-        private void Rooms_Executed(object sender, RoutedEventArgs e)
+        public void setAllDelegatesToNull()
         {
+            deleteSelectedRoom = null;
+            deleteSelectedPhysician = null;
+            deleteSelectedSecretary = null;
+            deleteSelectedMedicine = null;
+            deleteSelectedRenovation = null;
+            editRoom = null;
+            editPhysician = null;
+            editSecretary = null;
+            editMedicine = null;
+            editRenovation = null;
+            addRoom = null;
+            addPhysician = null;
+            addSecretary = null;
+            addMedicine = null;
+            addRenovation = null;
+            roomRenovation = null;
+            roomEquipment = null;
+            workingHours = null;
+            vacation = null;
+            roomsSelected = null;
+            physiciansSelected = null;
+            secretariesSelected = null;
+            medicineSelected = null;
+            renovationsSelected = null;
+            deleteSelectedRejection = null;
+            rejectionSelected = null;
+            editRejection = null;
+            deleteApprovedMedicine = null;
+            approvedMedicineSelected = null;
+        }
+
+    private void Rooms_Executed(object sender, RoutedEventArgs e)
+        {
+            setAllDelegatesToNull();
             CreateRoomDataContext();
+            
         }
 
         private void Physicians_Executed(object sender, RoutedEventArgs e)
         {
+            setAllDelegatesToNull();
             DataContext = _physicianTableViewModel;
             SelectedTabIndex = (int)currentTabIndex.physiciansTabIndex;
             physiciansTab.IsChecked = true;
@@ -115,6 +142,7 @@ namespace HealthClinic
 
         private void Secretaries_Executed(object sender, RoutedEventArgs e)
         {
+            setAllDelegatesToNull();
             DataContext = _secretaryTableViewModel;
             SelectedTabIndex = (int)currentTabIndex.secretariesTabIndex;
             secretariesTab.IsChecked = true;
@@ -124,6 +152,7 @@ namespace HealthClinic
 
         private void WaitingMedicine_Executed(object sender, RoutedEventArgs e)
         {
+            MedicineTableView.setAllDelegatesToNull += setAllDelegatesToNull;
             DataContext = _waitingMedicineTableViewModel;
             SelectedTabIndex = (int)currentTabIndex.medicineTabIndex;
             medicineTab.IsChecked = true;
@@ -134,6 +163,7 @@ namespace HealthClinic
 
         private void Renovation_Executed(object sender, RoutedEventArgs e)
         {
+            setAllDelegatesToNull();
             DataContext = _renovationTableViewModel;
             SelectedTabIndex = (int)currentTabIndex.renovationsTabIndex;
             renovationTab.IsChecked = true;
@@ -144,34 +174,91 @@ namespace HealthClinic
         }
 
 
+  
+        public static event mainVoidDelegate deleteSelectedRoom;
+        public static event mainVoidDelegate deleteSelectedPhysician;
+        public static event mainVoidDelegate deleteSelectedSecretary;
+        public static event mainVoidDelegate deleteSelectedMedicine;
+        public static event mainVoidDelegate deleteSelectedRenovation;
+        public static event mainVoidDelegate deleteSelectedRejection;
+        public static event mainVoidDelegate deleteApprovedMedicine;
+
         private void DeletoRow_Executed(object sender, RoutedEventArgs e)
         {
-            DialogResult dialogResult = MessageBox.Show("Da li ste sigurni da želite da izbrišete entitet?",
-                "Brisanje red", MessageBoxButtons.YesNo);
+            switch (SelectedTabIndex)
+            {
+                case (int)currentTabIndex.roomsTabIndex:
+                    deleteSelectedRoom();
+                    break;
+                case (int)currentTabIndex.physiciansTabIndex:
+                    deleteSelectedPhysician();
+                    break;
+                case (int)currentTabIndex.secretariesTabIndex:
+                    deleteSelectedSecretary();
+                    break;
+                case (int)currentTabIndex.medicineTabIndex:
+                    switch (MedicineTableView.selectedRadio)
+                    {
+                        case 0:
+                            deleteSelectedMedicine();
+                            break;
+                        case 1:
+                            deleteSelectedRejection();
+                            break;
+                        case 2:
+                            deleteApprovedMedicine();
+                            break;
+                    }
+                    
+                    break;
+                case (int)currentTabIndex.renovationsTabIndex:
+                    deleteSelectedRenovation();
+                    break;
+                default:
+                    break;
+            }
+            
         }
+
+
+  
+        public static event mainVoidDelegate editRoom;
+        public static event mainVoidDelegate editPhysician;
+        public static event mainVoidDelegate editSecretary;
+        public static event mainVoidDelegate editMedicine;
+        public static event mainVoidDelegate editRejection;
+        public static event mainVoidDelegate editRenovation;
+
+
         private void EditRow_Executed(object sender, RoutedEventArgs e)
         {
             switch (SelectedTabIndex)
             {
                 case (int)currentTabIndex.roomsTabIndex:
-                    NewRoomDialog newRoomDialog = new NewRoomDialog();
-                    newRoomDialog.ShowDialog();
+                    editRoom();
                     break;
                 case (int)currentTabIndex.physiciansTabIndex:
-                    NewPhysicianDialog newPhysicianDialog = new NewPhysicianDialog();
-                    newPhysicianDialog.ShowDialog();
+                    editPhysician();
                     break;
                 case (int)currentTabIndex.secretariesTabIndex:
-                    NewSecretaryDialog newSecretaryDialog = new NewSecretaryDialog();
-                    newSecretaryDialog.ShowDialog();
+                    editSecretary();
                     break;
                 case (int)currentTabIndex.medicineTabIndex:
-                    NewMedicineDialog newMedicineDialog = new NewMedicineDialog();
-                    newMedicineDialog.ShowDialog();
+                    switch (MedicineTableView.selectedRadio)
+                    {
+                        case 0:
+                            editMedicine();
+                            break;
+                        case 1:
+                            editRejection();
+                            break;
+                        case 2:
+                            break;
+                    }
+
                     break;
                 case (int)currentTabIndex.renovationsTabIndex:
-                    NewRenovationDialog newRenovationDialog = new NewRenovationDialog();
-                    newRenovationDialog.ShowDialog();
+                    editRenovation();
                     break;
                 default:
                     break;
@@ -182,37 +269,85 @@ namespace HealthClinic
         }
 
 
+        public static event mainVoidDelegate addRoom;
+        public static event mainVoidDelegate addPhysician;
+        public static event mainVoidDelegate addSecretary;
+        public static event mainVoidDelegate addMedicine;
+        public static event mainVoidDelegate addRenovation;
+
+        private void AddRow_Executed(object sender, RoutedEventArgs e)
+        {
+            switch (SelectedTabIndex)
+            {
+                case (int)currentTabIndex.roomsTabIndex:
+                    addRoom();
+                    break;
+                case (int)currentTabIndex.physiciansTabIndex:
+                    addPhysician();
+                    break;
+                case (int)currentTabIndex.secretariesTabIndex:
+                    addSecretary();
+                    break;
+                case (int)currentTabIndex.medicineTabIndex:
+                    addMedicine();
+                    break;
+                case (int)currentTabIndex.renovationsTabIndex:
+                    addRenovation();
+                    break;
+                default:
+                    break;
+
+
+            }
+
+        }
+
+
+      
+
         private void FocusTable_Executed(object sender, RoutedEventArgs e)
         {
             Tables.Focus();
         }
 
-        private void Search_Executed(object sender, RoutedEventArgs e)
-        {
-            searchTextBox.Focus();
-        }
 
+        public static event mainVoidDelegate roomRenovation;
+        public static bool isRoomRenovationNull()
+        {
+            return roomEquipment == null;
+        }
         private void RoomRenovationDialog_Executed(object sender, RoutedEventArgs e)
         {
-            RoomRenovationDialog newRoomRenovationDialog = new RoomRenovationDialog();
-            newRoomRenovationDialog.ShowDialog();
+            roomRenovation();
         }
+
+
+        public static event mainVoidDelegate roomEquipment;
+   
+
 
         private void RoomEquipmentDialog_Executed(object sender, RoutedEventArgs e)
         {
-            RoomEquipmentDialog newRoomsEquipmentDialog = new RoomEquipmentDialog();
-            newRoomsEquipmentDialog.ShowDialog();
+
+            roomEquipment();
         }
+
+
+
+        public static event mainVoidDelegate workingHours;
 
         private void PhysicianWorkingDialog_Executed(object sender, RoutedEventArgs e)
         {
-            WorkingDialog newWorkingDialog = new WorkingDialog();
-            newWorkingDialog.ShowDialog();
+            workingHours();
         }
+
+      
+        public static event mainVoidDelegate vacation;
+
         private void PhysicianVacationDialog_Executed(object sender, RoutedEventArgs e)
         {
-           VacationDialog newVacationDialog = new VacationDialog();
-            newVacationDialog.ShowDialog();
+            vacation();
+          
         }
 
         private void Rooms_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -242,7 +377,7 @@ namespace HealthClinic
 
         private void RoomRenovationDialog_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            if (SelectedTabIndex==((int)currentTabIndex.roomsTabIndex))
+            if (SelectedTabIndex==((int)currentTabIndex.roomsTabIndex) && getSelecteRow() != -1)
             {
                 e.CanExecute = true;
             }
@@ -250,13 +385,12 @@ namespace HealthClinic
             {
                 e.CanExecute = false;
             }
-            //OVDE CE BITI PROVERA DA LI JE SELEKTOVANO U TABELI
         }
 
 
         private void RoomsEquipmentDialog_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            if (SelectedTabIndex == ((int)currentTabIndex.roomsTabIndex))
+            if (SelectedTabIndex == ((int)currentTabIndex.roomsTabIndex) && getSelecteRow() != -1)
             {
                 e.CanExecute = true;
             }
@@ -267,7 +401,7 @@ namespace HealthClinic
         }
         private void PhysicianVacationDialog_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            if (SelectedTabIndex == ((int)currentTabIndex.physiciansTabIndex))
+            if (SelectedTabIndex == ((int)currentTabIndex.physiciansTabIndex) && getSelecteRow() != -1)
             {
                 e.CanExecute = true;
             }
@@ -280,7 +414,7 @@ namespace HealthClinic
 
         private void PhysicianWorkingDialog_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            if (SelectedTabIndex == ((int)currentTabIndex.physiciansTabIndex))
+            if (SelectedTabIndex == ((int)currentTabIndex.physiciansTabIndex) && getSelecteRow() != -1)
             {
                 e.CanExecute = true;
             }
@@ -329,5 +463,120 @@ namespace HealthClinic
         }
 
 
+        public static event mainIntDelegate roomsSelected;
+        public static event mainIntDelegate physiciansSelected;
+        public static event mainIntDelegate secretariesSelected;
+        public static event mainIntDelegate medicineSelected;
+        public static event mainIntDelegate rejectionSelected;
+        public static event mainIntDelegate renovationsSelected;
+        public static event mainIntDelegate approvedMedicineSelected;
+
+
+        private int getSelecteRow()
+        {
+            
+            switch (SelectedTabIndex)
+            {
+                case (int)currentTabIndex.roomsTabIndex:
+                    SelectedTableRowIndex = roomsSelected();
+                    break;
+                case (int)currentTabIndex.physiciansTabIndex:
+                    SelectedTableRowIndex = physiciansSelected();
+                    break;
+                case (int)currentTabIndex.secretariesTabIndex:
+                    SelectedTableRowIndex = secretariesSelected();
+                    break;
+                case (int)currentTabIndex.medicineTabIndex:
+                    switch (MedicineTableView.selectedRadio)
+                    {
+                        case 0:
+                            SelectedTableRowIndex = medicineSelected();
+                            break;
+                        case 1:
+                            SelectedTableRowIndex = rejectionSelected();
+                            break;
+                        case 2:
+                            SelectedTableRowIndex = approvedMedicineSelected();
+                            break;
+                    }
+
+                    break;
+                case (int)currentTabIndex.renovationsTabIndex:
+                    SelectedTableRowIndex = renovationsSelected();
+                    break;
+                default:
+                    SelectedTableRowIndex = -1;
+                    break;
+            }
+            return SelectedTableRowIndex;
+        }
+
+
+        private void Demo_Click(object sender, RoutedEventArgs e)
+        {
+            
+            Thread.Sleep(500);
+            Physicians_Executed(sender, e);
+            
+            Thread.Sleep(2000);
+            AddRow_Executed(sender, e);
+  
+        }
+
+        private void Help(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start(@"E:\programi\c#\HCI\Projekat\HealthClinic\HealthClinic\Static\Help.pdf");
+        }
+
+        private void Edit_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            bool medicineBool = true;
+            if (SelectedTabIndex == (int)currentTabIndex.medicineTabIndex)
+            {
+                switch (MedicineTableView.selectedRadio)
+                {
+                    case 0:
+                        medicineBool = true;
+                        break;
+                    case 1:
+                        medicineBool = true;
+                        break;
+                    case 2:
+                        medicineBool = false;
+                        break;
+                }
+
+            }
+
+            e.CanExecute = getSelecteRow() != -1 && medicineBool;
+        }
+
+        private void Delete_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = getSelecteRow() != -1;
+        }
+
+        private void Add_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            bool medicineBool = true;
+            if (SelectedTabIndex == (int)currentTabIndex.medicineTabIndex)
+            {
+                switch (MedicineTableView.selectedRadio)
+                {
+                    case 0:
+                        medicineBool = true;
+                        break;
+                    case 1:
+                        medicineBool = false;
+                        break;
+                    case 2:
+                        medicineBool = false;
+                        break;
+                }
+
+            }
+
+            e.CanExecute = medicineBool;
+        }
     }
 }

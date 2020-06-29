@@ -27,19 +27,40 @@
             <Label FontSize="25" Grid.Column="0">Lekari</Label>
 
         </Grid>
-        <DataGrid Grid.Row="1" Grid.RowSpan="9" x:Name="dataGridPhysicians" ItemsSource="{Binding Physicians}" IsReadOnly="True"  SelectionMode="Single" 
-                  AutoGenerateColumns="False">
+        <DataGrid Grid.Row="1" Grid.RowSpan="8" x:Name="dataGridPhysicians" ItemsSource="{Binding Physicians}" IsReadOnly="True"  SelectionMode="Single" 
+                  AutoGenerateColumns="False" KeyDown="shiftPressed" SelectionChanged="selectionChanged_Event">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Ime" Binding="{Binding Name}" Width="*"/>
                 <DataGridTextColumn Header="Prezime" Binding="{Binding Surname}" Width="*" />
                 <DataGridTextColumn Header="JMBG" Binding="{Binding Jmbg}" Width="*"/>
-                <DataGridTextColumn Header="Adresa stanovanja" Binding="{Binding Adress}" Width="*"/>
+                <DataGridTextColumn Header="Adresa stanovanja" Binding="{Binding Address}" Width="*"/>
                 <DataGridTextColumn Header="Datum rođenja" Binding="{Binding BirthDate}" Width="*" />
-                <DataGridTextColumn Header="Specijalnost" Binding="{Binding Specialty}" Width="*"/>
+                <DataGridTextColumn Header="Specijalnost" Binding="{Binding Speciality}" Width="*"/>
                 <DataGridTextColumn Header="Radno vreme" Binding="{Binding WorkingHours}" Width="*" />
-  
+                
 
             </DataGrid.Columns>
         </DataGrid>
+        <Menu x:Name="menu" HorizontalAlignment="Right" Height="134" Margin="700,35,0,0" Grid.Row="3" Grid.RowSpan="4" VerticalAlignment="Top" Width="100" IsEnabled="False" Visibility="Collapsed">
+            <Menu.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel VerticalAlignment="Stretch"></StackPanel>
+                </ItemsPanelTemplate>
+            </Menu.ItemsPanel>
+            <MenuItem Header="Nazad" x:Name="backOption" Click="back" />
+            <MenuItem Header="Dodaj lekara" x:Name="addOption" Click="addRowOption" />
+            <MenuItem Header="Izmeni lekara" x:Name="editOption" Click="editRowOption"  />
+            <MenuItem Header="Izbriši lekara" x:Name="deleteOption" Click="deleteRowOtpion" />
+            <MenuItem Header="Godišnji odmori" x:Name="vacationOption" Click="vacation"  />
+            <MenuItem Header="Radno vreme" x:Name="workOption" Click="working" />
+
+        </Menu>
+        <StackPanel Grid.Row="9" Margin="0,25,0,0">
+            <StatusBarItem>
+                <TextBlock Name="statusBar">
+                    
+                </TextBlock>
+            </StatusBarItem>
+        </StackPanel>
     </Grid>
 </UserControl>

@@ -6,6 +6,9 @@
              xmlns:local="clr-namespace:HealthClinic.View.TableViews"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+            
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
@@ -27,14 +30,36 @@
             <Label FontSize="25" Grid.Column="0">Sobe</Label>
 
         </Grid>
-        <DataGrid Grid.Row="1" Grid.RowSpan="9" x:Name="dataGridRooms" ItemsSource="{Binding Rooms}" IsReadOnly="True"  SelectionMode="Single" 
-                  AutoGenerateColumns="False">
+        <DataGrid Grid.Row="1" Grid.RowSpan="8" x:Name="dataGridRooms" ItemsSource="{Binding Rooms}" IsReadOnly="True"  SelectionMode="Single" 
+                  AutoGenerateColumns="False" KeyUp="shiftPressed"  SelectionChanged="selectionChanged_Event">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="*"/>
                 <DataGridTextColumn Header="Tip" Binding="{Binding Type}" Width="*" />
-                <DataGridTextColumn Header="Datum renoviranja" Binding="{Binding Occupation}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
-            
+
+
+        <Menu x:Name="menu" HorizontalAlignment="Right" Height="134" Margin="700,35,0,0" Grid.Row="3" Grid.RowSpan="4" VerticalAlignment="Top" Width="100" IsEnabled="False" Visibility="Collapsed">
+            <Menu.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel VerticalAlignment="Stretch"></StackPanel>
+                </ItemsPanelTemplate>
+            </Menu.ItemsPanel>
+            <MenuItem Header="Nazad" x:Name="backOption" Click="back"  />
+            <MenuItem Header="Dodaj sobu" x:Name="addOption" Click="addRowOption"/>
+            <MenuItem Header="Izmeni sobu" x:Name="editOption" Click="editRowOption" />
+            <MenuItem Header="Izbriši sobu" x:Name="deleteOption" Click="deleteRowOtpion" />
+            <MenuItem Header="Oprema" x:Name="equipmentOption" Click="equipmentOptionClick"/>
+            <MenuItem Header="Zakaži renoviranje" x:Name="renovationOption" Click="renovationOptionClick"/>
+        </Menu>
+        <StackPanel Grid.Row="9" Margin="0,25,0,0">
+            <StatusBarItem>
+                <TextBlock Name="statusBar">
+
+                </TextBlock>
+            </StatusBarItem>
+        </StackPanel>
     </Grid>
+  
+
 </UserControl>
