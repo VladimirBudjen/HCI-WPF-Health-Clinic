@@ -23,9 +23,9 @@ namespace Backend.Service.SchedulingService.PriorityStrategies
             List<AppointmentDTO> appointmentDTOs = new List<AppointmentDTO>();
             foreach (Physitian physitian in physitians)
             {
-                DateTime currentDate = suggestedAppointmentDTO.Date_start;
+                DateTime currentDate = suggestedAppointmentDTO.DateStart;
 
-                while (!currentDate.Equals(suggestedAppointmentDTO.Date_end))
+                while (!currentDate.Equals(suggestedAppointmentDTO.DateEnd))
                 {
                     AppointmentDTO appointment = new AppointmentDTO();
                     appointment.Date = currentDate;

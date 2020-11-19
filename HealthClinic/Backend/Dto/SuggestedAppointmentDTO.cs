@@ -9,16 +9,16 @@ namespace Backend.Dto
 {
     public class SuggestedAppointmentDTO
     {
-        private DateTime date_start;
-        private DateTime date_end;
+        private DateTime dateStart;
+        private DateTime dateEnd;
         private Physitian physitian;
         private Patient patient;
         private bool prior;
 
         public Physitian Physitian { get => physitian; set => physitian = value; }
         public Patient Patient { get => patient; set => patient = value; }
-        public DateTime Date_start { get => date_start; set => date_start = value; }
-        public DateTime Date_end { get => date_end; set => date_end = value; }
+        public DateTime DateStart { get => dateStart; set => dateStart = value; }
+        public DateTime DateEnd { get => dateEnd; set => dateEnd = value; }
         public bool Prior { get => prior; set => prior = value; }
     }
 }

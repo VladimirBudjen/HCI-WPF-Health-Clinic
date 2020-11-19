@@ -38,9 +38,9 @@ namespace Backend.Service.SchedulingService
         }
         public AppointmentDTO GetSuggestedAppointment(SuggestedAppointmentDTO suggestedAppointmentDTO)
         {
-            DateTime currentDate = suggestedAppointmentDTO.Date_start;
+            DateTime currentDate = suggestedAppointmentDTO.DateStart;
             
-            while (!currentDate.Equals(suggestedAppointmentDTO.Date_end))
+            while (!currentDate.Equals(suggestedAppointmentDTO.DateEnd))
             {
                 AppointmentDTO appointment = new AppointmentDTO();
                 appointment.Date = currentDate;

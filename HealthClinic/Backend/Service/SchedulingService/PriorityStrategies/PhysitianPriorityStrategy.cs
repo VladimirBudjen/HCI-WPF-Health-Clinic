@@ -15,9 +15,9 @@ public class PhysitianPriorityStrategy : PriorityStrategy
     {
         public List<AppointmentDTO> FindSuggestedAppointments(SuggestedAppointmentDTO suggestedAppointmentDTO)
         {
-            DateTime currentDate = suggestedAppointmentDTO.Date_start.AddDays(-3);
+            DateTime currentDate = suggestedAppointmentDTO.DateStart.AddDays(-3);
             List<AppointmentDTO> appointmentDTOs = new List<AppointmentDTO>();
-            while (!currentDate.Equals(suggestedAppointmentDTO.Date_end.AddDays(3)))
+            while (!currentDate.Equals(suggestedAppointmentDTO.DateEnd.AddDays(3)))
             {
                 AppointmentDTO appointment = new AppointmentDTO();
                 if (currentDate.CompareTo(DateTime.Today)<0)
@@ -29,9 +29,9 @@ public class PhysitianPriorityStrategy : PriorityStrategy
                 appointment.Patient = suggestedAppointmentDTO.Patient;
                 appointmentDTOs.Add(appointment);
                 currentDate = currentDate.AddDays(1);
-                if(currentDate == suggestedAppointmentDTO.Date_start)
+                if(currentDate == suggestedAppointmentDTO.DateStart)
                 {
-                    currentDate = suggestedAppointmentDTO.Date_end;
+                    currentDate = suggestedAppointmentDTO.DateEnd;
                 }
             }
             return appointmentDTOs;
